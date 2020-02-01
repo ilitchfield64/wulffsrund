@@ -81,10 +81,27 @@ def location(): # Will track the location of the player and what room's dialouge
     pass
 
 def prompt(): # All keywords will be handled by the prompt and simplified for the enigine
-    verbs = ["go", "walk", "climb", "jump", "take", "sneak", "stab", "attack", "kill", "confront", "push", "break", "evade", "look" , "check"]
+
+    verbs = ["go", "walk", "climb", "jump", "take", "sneak", "stab", "attack", "kill", "confront", "push", "break", "evade", "dodge", "look" , "check", "help"]
     compass_directions = ["north","south","east","west"] # Ordered so the first letter of each direction may be used.
-    ### want to make it pop out articles (the, at, etc.) and return the data back to be processed?
     verbal_dirctions = ["up", "down", "right", "forward", "back", "left"]
+
+    choice = input("> ")
+    choice = choice.lower()
+    choice_list = choice.split
+
+    def checkVerb(choice): # Checks to see if sentenece begins with a verb keyword
+        list = splitChoice(choice)
+        if list[1] in verbs:
+            return True
+        else:
+            return False
+    if checkVerb(choice_list):
+        print("True test")
+        pass
+    else:
+        print("Do what?")
+
 def screen_clear(): # Clears the screen
     if name == "nt":
         _ = system("cls") # Detects is windows to use NT cls to clear screen
