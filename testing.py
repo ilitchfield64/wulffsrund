@@ -1,78 +1,106 @@
-"""
-Last thing worked on, need to pop items in the list and compare them against the accepted values in master lists
-list[index] in another_list returns an error
-Must pop off list and check with a for loop?
-
-define a listPopChecker(takeInList,  wanted index)
-    pop off each and check against the master lists
-    if not in list a move to next list until found
-    create a string to return for further processing?
-
-I need to write a method that will take in a list, compare that data to another list,
-and then perform an action based on that comparison.
-"""
 from sys import exit
+
 def prompt(): # All keywords will be handled by the prompt and simplified for the enigine
 
 ## DECLARARTIONS ##
-    # The commented lists will be added when I learn how to check them in a easy to read manner
+    #verbs = ["go", "walk", "move", "climb", "jump", "take", "sneak", "stab", "attack", "kill", "confront", "push", "break", "evade", "dodge", "look" , "check", "help", "quit", "exit", "leave"]
     special =["help", "look", "check"]
     exits = ["quit", "exit", "leave"]
-    verbs = ["go", "walk", "move", "climb", "jump", "take", "sneak", "stab", "attack", "kill", "confront", "push", "break", "evade", "dodge", "look" , "check", "help", "quit", "exit"]
-    #movement = ["go", "walk", "move", "climb", "jump"]
-    #attacks = ["attack", "stab", "hit", "kill", "confront"]
-    #dodge = ["dodge", "evade", "avoid"]
-    #actions = ["take", "push","break"]
-    #modifier = ["sneak", "stealth"]
-    compass_directions = ["north","south","east","west"] # Ordered so the first letter of each direction may be used.
+    movement = ["go", "walk", "move", "climb", "jump"]
+    attacks = ["attack", "stab", "hit", "kill", "confront"]
+    dodge = ["dodge", "evade", "avoid"]
+    actions = ["take", "push", "break"]
+    modifier = ["sneak", "stealth"]
+    compass_directions = ["north", 'n', "south", 's', "east", 'e', "west", 'w']
     verbal_dirctions = ["up", "down", "right", "forward", "back", "left"]
 
+    sneak = False
 
 
 ## PRIVATE METHODS ##
-    def splitToList(string): # will split the user input to a list
-        return string.split(" ")
-
-    def checkIfVerb(list): # Checks to see if sentenece begins with a verb keyword
-        if list[0] in verbs:
-            return True
-        else:
-            return False
-    def whatVerb(): # If is_verb is true it will figure what verb and simplify it to return to the room module
-        if list[0] in exits:
-            ifQuit()
-        else:
-            pass
-
     def whatDirection(list): # Will cycle through the inputed list and find if there is a direction, and what direction if so
-        list = list
-        for i in list:
-            #list = splitToList(action)
-            popped = list.pop(0)
-            print(popped)
-            if popped in compass_directions:
-                print("In compass Directions")
-            elif popped in verbal_dirctions:
-                print("In verbal_dirctions")
-            else:
-                print("Not in directions")
-    def ifQuit():
-        print("Quitting")
-        exit(0)
-    #def
+        print("What Direction")
+        i = 0
+        try: # This method may return an IndexError
+            while i < 5: # Instead of checking the entire list it will check up to 5 words ie go quickly out the left | door
+                if list[i] in compass_directions: #
+                    print("In compass Directions")
+                    return True, list.pop(i)
+                elif list[i] in verbal_dirctions:
+                    print("In verbal_dirctions")
+                    return True, list.pop(i)
+                else:
+                    i = i+1
+            print("Invalid Direction")
+            return False,""
+        except IndexError: # If the command is < 5 the program will create an exception to checking by the length of the list
+            for i in range(0, len(list)):
+                if list[i] in compass_directions: #
+                    print("In compass Directions")
+                    return True, list.pop(i)
+                elif list[i] in verbal_dirctions:
+                    print("In verbal_dirctions")
+                    return True, list.pop(i)
+                else:
+                    pass
+            print("Invalid Direction")
+            return False,""
+
+    def createMove(direction): # Takes in a tupple from whatDirection to return a movement to main execution
+        if direction[0]: # Returns a direction to move in
+            movement = ["move"]
+            movement.append(direction[1])
+            return movement
+        else: # No direction entered which leads to a new prompt.
+            print("No Direction entered")
+            return False
+
 ## EXECUTION OF CODE ##
     # Takes in the user input to check the action
     while True:
         action = input("> ")
         action = action.lower()
-        action_list = action.split(" ")
-        print(action_list[0])
-        if checkIfVerb(splitToList(action)): # should return true if the first word typed is a keyword
-            print("True test")
-            whatVerb() # call to the what verb
-        else: # If first word is not a verb, will prevent the prompt from returning to the room module
-            print("Not in any list") # debugging
+        action = action.split(" ")
+        print(f"{action} was entered")
+        if action[0] in modifier: # Checks to see if sneak is in sentance
+            print
+            sneak = True
+            action.pop(0)
+        else:
             pass
 
+        try: # Will protect the program from crashing if sneak is the only word typed
+            exception = action[0]
+            del exception
+        except IndexError:
+            print("Had IndexError")
+            action.append("") # Puts empty data into the list to continue the loop without crashing
 
-prompt()
+        if action[0] in exits: # Will Exit the program
+            print("Exiting Program")
+            exit(0)
+        elif action[0] in special:
+            pass
+        elif action[0] in movement: # Returns what room to move to
+            action = (createMove(whatDirection(action)))
+            if not action:
+                pass
+            else:
+                print(action)
+
+                return action
+        elif action[0] in attacks: # Returns what to attack
+            print(f"{action} in attacks")
+            pass
+        elif action[0] in dodge: # Returns what to evade
+            print(f"{action} in dodge")
+            pass
+        elif action[0] in actions: # Returns what to break/push
+            print(f"{action} in actions")
+            pass
+        else: # Will loop the prompt
+            print("What?")
+
+
+outcome = prompt()
+print(f"{outcome} is returned by the prompt")

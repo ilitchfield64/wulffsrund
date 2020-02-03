@@ -1,0 +1,25 @@
+2/1/2020
+Last thing worked on, need to pop items in the list and compare them against the accepted values in master lists
+list[index] in another_list returns an error
+Must pop off list and check with a for loop?
+
+define a listPopChecker(takeInList,  wanted index)
+    pop off each and check against the master lists
+    if not in list a move to next list until found
+    create a string to return for further processing?
+
+I need to write a method that will take in a list, compare that data to another list,
+and then perform an action based on that comparison.
+ # This has been found to be useless by later
+2/2/2020
+-I found out I forgot to put the list into the call for the function, so it never had a list to check causing my error
+whatDirection now functions.
+
+-Working on a methods to return to structured responses for the game to handle.
+
+-Will be reorganizing code again to make it more readable
+    I've been writing complicated methods to check everything, when I could just handle it in a few if statements in main()
+
+-Put verb checks into the main section of method
+
+-Tomorrow I will work on adding what to do with other actions. Hopefully the prompt() method will be fully working by 2/6/2020
