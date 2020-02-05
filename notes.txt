@@ -23,3 +23,16 @@ whatDirection now functions.
 -Put verb checks into the main section of method
 
 -Tomorrow I will work on adding what to do with other actions. Hopefully the prompt() method will be fully working by 2/6/2020
+
+2/3/2020
+- worked on the look and help functionality
+- want to separate vertical and horizontal movement in the createMove() function. that way you cant jump or climb forward.
+  -simple fix. If climb or jump in list then error if not up or down.
+
+2/4/2020
+- reworked direction finding, and separated some keywords
+- Completed the prompt()
+- renamed testing.py to prompt.py, might be adding to main engine. Gotta look into how modules/packages are made and used.
+    -The more modular the code, the better.
+- Integrating item handling into the prompt, added sarcasm to attacking self
+- Need program climbing walls, trees, etc. instead of just directions **** ADDED ****
