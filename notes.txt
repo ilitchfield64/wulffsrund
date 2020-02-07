@@ -36,3 +36,8 @@ whatDirection now functions.
     -The more modular the code, the better.
 - Integrating item handling into the prompt, added sarcasm to attacking self
 - Need program climbing walls, trees, etc. instead of just directions **** ADDED ****
+
+2/6/2020
+- Merged the files back into one. May separate again later
+- Prompt functions as intended will be merging branches. Just have to learn how.
+- Added files to .gitignore 

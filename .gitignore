@@ -2,3 +2,6 @@
 __pycache__/
 MapTextGame.xcf
 ex36_outline.txt
+rooms.py
+prompt.py
+testing.py
