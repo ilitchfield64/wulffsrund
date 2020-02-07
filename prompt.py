@@ -1,4 +1,11 @@
 from sys import exit
+from os import system, name
+def screen_clear(): # Clears the screen
+    if name == "nt":
+        _ = system("cls") # Detects is windows to use NT cls to clear screen
+        pass
+    else:
+        _ = system("clear") # *nix OSes use clear
 
 def prompt(player_inv): # All keywords will be handled by the prompt and simplified for the enigine
 
@@ -44,11 +51,9 @@ def prompt(player_inv): # All keywords will be handled by the prompt and simplif
                     return True, "down"
                 else:
                     pass
-            print("Invalid Direction")
             return False,None
 
     def createMove(list, direction): # Takes in a tupple from whatDirection to return a movement to main execution
-        print(list)
         if list[0] == "climb":
             if direction[0]:
                 return "climb", direction[1]
@@ -81,7 +86,8 @@ def prompt(player_inv): # All keywords will be handled by the prompt and simplif
         elif action[0] in exits: # Will Exit the program
             print("Exiting Program")
             exit(0)
-
+        elif action[0] == "clear":
+            screen_clear()
         elif action[0] in special:
             if action[0] == special[0]: # Prints a short help message for the prompt
                 print("Welcome to The World of Wulfmund, where all your greatest fantasies come true.")
@@ -171,19 +177,15 @@ def prompt(player_inv): # All keywords will be handled by the prompt and simplif
                     for y in range(0, len(player_inv)): # y selects what to compare it to.
                         if action[x] == player_inv[y]:
                             return action[0], action[x]
-                        else: # If nothing is found moce to the next x
+                        else: # If nothing is found move to the next x
                             pass
 
                 else:
                     print("Item is not in Inventory")
             except IndexError:
                 print("What item?")
+        elif action[0] == "inventory":
+            return "inventory"
 
         else: # Will loop the prompt
             print("What?")
-
-inv = ["sword"]
-while True:
-
-    outcome = prompt(inv)
-    print(f"{outcome} is returned by the prompt")
